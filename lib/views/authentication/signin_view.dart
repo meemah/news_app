@@ -5,18 +5,18 @@ import 'package:news_app/custom_widgets/custom_button.dart';
 import 'package:news_app/custom_widgets/custom_spacing.dart';
 import 'package:news_app/custom_widgets/custom_textfield.dart';
 import 'package:news_app/services/networking_service.dart/network_status_check.dart';
+import 'package:news_app/services/news_service.dart';
 import 'package:news_app/utils/form_validators.dart';
-import 'package:news_app/viewmodels/sign_up_viewmodel.dart';
+import 'package:news_app/viewmodels/sign_in_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-class SignUpView extends StatelessWidget with Validators {
-  SignUpView({super.key});
+class SignInView extends StatelessWidget with Validators {
+  SignInView({super.key});
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,15 +30,11 @@ class SignUpView extends StatelessWidget with Validators {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Sign Up.",
+                    "Sign In.",
                     style:
                         TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
                   ),
                   const YMargin(30),
-                  CustomTextField(
-                      controller: nameController,
-                      textfieldLabel: "Name",
-                      validator: Validators.validateUserName),
                   CustomTextField(
                       controller: emailController,
                       textfieldLabel: "Email",
@@ -48,30 +44,20 @@ class SignUpView extends StatelessWidget with Validators {
                       textfieldLabel: "Password",
                       obscureText: true,
                       validator: Validators.validatePassword),
-                  CustomTextField(
-                      controller: confirmPasswordController,
-                      textfieldLabel: "Confirm Password",
-                      obscureText: true,
-                      validator: (value) {
-                        if (value != passwordController.text) {
-                          return "Passwords do not match";
-                        }
-                      }),
                   const YMargin(40),
-                  Consumer<SignUpViewmodel>(
-                      builder: ((context, signUpViewmodel, child) {
+                  Consumer<SignInViewmodel>(
+                      builder: ((context, signInViewmodel, child) {
                     return CustomButton(
                         isLoading: isApiResponseLoading(
-                            signUpViewmodel.signUpResponse),
-                        title: "Sign Up",
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            signUpViewmodel.signUp(
-                                name: nameController.text.trim(),
-                                email: emailController.text.trim(),
-                                password:
-                                    confirmPasswordController.text.trim());
-                          }
+                            signInViewmodel.signInResponse),
+                        title: "Sign In",
+                        onTap: () async {
+                          NewsService().getNews(pageNumber: "1");
+                          // if (_formKey.currentState!.validate()) {
+                          //   signInViewmodel.signIn(
+                          //       email: emailController.text,
+                          //       password: passwordController.text);
+                          // }
                         });
                   }))
                 ],
