@@ -10,6 +10,7 @@ class NetworkClientImpl extends NetworkService {
   final Dio _dio = Dio();
 
   NetworkClientImpl() {
+    _dio.options.sendTimeout = 60 * 1000;
     _dio.options.receiveTimeout = 60 * 1000;
     _dio.options.responseType = ResponseType.json;
   }
