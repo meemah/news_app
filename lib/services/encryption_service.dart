@@ -24,13 +24,9 @@ class EncryptionServiceImpl extends EncryptionService {
 
       final key = encrypt.Key.fromUtf8(keyString ?? "");
 
-      try {
-        final encrypter = encrypt.Encrypter(encrypt.AES(key));
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
 
-        return encrypter.decrypt64(encrptedPassword, iv: iv);
-      } catch (exception) {
-        // dev.log(exception.toString());
-      }
+      return encrypter.decrypt64(encrptedPassword, iv: iv);
     }
   }
 

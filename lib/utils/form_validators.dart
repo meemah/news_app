@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 mixin Validators {
   static String? validateUserName(String? value) {
     if (value != null) {

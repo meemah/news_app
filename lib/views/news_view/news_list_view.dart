@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:news_app/custom_widgets/custom_spacing.dart';
+
 import 'package:news_app/views/news_view/components/news_shimmer.dart';
 import 'package:news_app/models/news_resp.dart';
 import 'package:news_app/viewmodels/news_viewmodel.dart';
 import 'package:news_app/views/news_view/components/news_detail.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class NewsListView extends StatefulWidget {
   const NewsListView({super.key});
@@ -21,7 +19,9 @@ class _NewsListViewState extends State<NewsListView> {
   @override
   void initState() {
     super.initState();
-    Provider.of<NewsViewmodel>(context, listen: false).initController();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<NewsViewmodel>(context, listen: false).initController();
+    });
   }
 
   @override

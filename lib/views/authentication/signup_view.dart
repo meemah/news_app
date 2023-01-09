@@ -1,13 +1,20 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/custom_widgets/custom_button.dart';
 import 'package:news_app/custom_widgets/custom_spacing.dart';
 import 'package:news_app/custom_widgets/custom_textfield.dart';
+import 'package:news_app/custom_widgets/custom_toast.dart';
 import 'package:news_app/services/networking_service.dart/network_status_check.dart';
 import 'package:news_app/utils/form_validators.dart';
+import 'package:news_app/utils/routes/route_names.dart';
+
 import 'package:news_app/viewmodels/sign_up_viewmodel.dart';
 import 'package:provider/provider.dart';
+
+import 'components/auth_rich_text.dart';
 
 class SignUpView extends StatelessWidget with Validators {
   SignUpView({super.key});
@@ -56,7 +63,9 @@ class SignUpView extends StatelessWidget with Validators {
                         if (value != passwordController.text) {
                           return "Passwords do not match";
                         }
+                        return null;
                       }),
+                  const AuthRichText(isSignUp: true),
                   const YMargin(40),
                   Consumer<SignUpViewmodel>(
                       builder: ((context, signUpViewmodel, child) {
@@ -64,13 +73,22 @@ class SignUpView extends StatelessWidget with Validators {
                         isLoading: isApiResponseLoading(
                             signUpViewmodel.signUpResponse),
                         title: "Sign Up",
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            signUpViewmodel.signUp(
+                            await signUpViewmodel.signUp(
                                 name: nameController.text.trim(),
                                 email: emailController.text.trim(),
                                 password:
                                     confirmPasswordController.text.trim());
+                            if (isApiResponseCompleted(
+                                signUpViewmodel.signUpResponse)) {
+                              Navigator.popAndPushNamed(
+                                  context, AppRoutes.home);
+                            } else if (isApiResponseError(
+                                signUpViewmodel.signUpResponse)) {
+                              showToast(signUpViewmodel.signUpResponse.message,
+                                  isError: true);
+                            }
                           }
                         });
                   }))

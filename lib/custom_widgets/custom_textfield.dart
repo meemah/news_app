@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
           validator: validator,
           controller: controller,
           keyboardType: textInputType,
+          obscureText: obscureText,
           decoration: InputDecoration(
               hintText: textfieldLabel,
               isDense: true,

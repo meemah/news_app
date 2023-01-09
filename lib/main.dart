@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/services/database_service.dart';
 import 'package:news_app/utils/locator.dart';
+import 'package:news_app/utils/routes/routers.dart';
 import 'package:news_app/viewmodels/news_viewmodel.dart';
 import 'package:news_app/viewmodels/sign_in_viewmodel.dart';
 import 'package:news_app/viewmodels/sign_up_viewmodel.dart';
-import 'package:news_app/views/news_view/news_list_view.dart';
+import 'package:news_app/views/authentication/signin_view.dart';
+
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -39,12 +41,13 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (_, __) => MaterialApp(
         title: "News App",
+        onGenerateRoute: (settings) => Routers.generateRoute(settings, context),
         theme: ThemeData(
           textTheme: GoogleFonts.mulishTextTheme(),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         locale: const Locale('en'),
-        home: const NewsListView(),
+        home: SignInView(),
       ),
     );
   }

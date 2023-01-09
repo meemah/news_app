@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:news_app/models/news_resp.dart';
 import 'package:news_app/services/news_service.dart';
+import 'package:news_app/utils/locator.dart';
 
 class NewsViewmodel extends ChangeNotifier {
+  final NewsService _newsService = serviceLocator<NewsService>();
   final PagingController<int, Article> pagingController =
       PagingController(firstPageKey: 1);
   initController() {
@@ -15,7 +17,7 @@ class NewsViewmodel extends ChangeNotifier {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final response =
-          await NewsService().getNews(pageNumber: pageKey.toString());
+          await _newsService.getNews(pageNumber: pageKey.toString());
       NewsRespModel respModel = NewsRespModel.fromJson(response);
       List<Article> newItems = respModel.articles!;
 
