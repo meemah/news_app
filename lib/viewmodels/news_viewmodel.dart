@@ -16,9 +16,9 @@ class NewsViewmodel extends ChangeNotifier {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final response =
+      final respModel =
           await _newsService.getNews(pageNumber: pageKey.toString());
-      NewsRespModel respModel = NewsRespModel.fromJson(response);
+
       List<Article> newItems = respModel.articles!;
 
       final isLastPage = newItems.length == (respModel.totalResults ?? 0);

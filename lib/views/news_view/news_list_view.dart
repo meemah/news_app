@@ -19,9 +19,8 @@ class _NewsListViewState extends State<NewsListView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<NewsViewmodel>(context, listen: false).initController();
-    });
+
+    Provider.of<NewsViewmodel>(context, listen: false).initController();
   }
 
   @override
