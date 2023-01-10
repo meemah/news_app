@@ -29,6 +29,7 @@ class SignInView extends StatelessWidget with Validators {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
