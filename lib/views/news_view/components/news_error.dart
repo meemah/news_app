@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:news_app/custom_widgets/custom_spacing.dart';
 
 class NewsError extends StatelessWidget {
