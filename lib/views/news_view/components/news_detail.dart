@@ -15,21 +15,23 @@ class NewsDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: GestureDetector(
         onTap: () => Navigator.pushNamed(context, AppRoutes.webview,
             arguments: article.url),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
               article.urlToImage ?? "",
-              height: 80.h,
-              width: 80.w,
-              cacheHeight: 80,
+              height: 65.h,
+              width: 65.w,
+              cacheHeight: 65,
+              fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return SizedBox(
-                    height: 80.h,
-                    width: 80.w,
+                    height: 65.h,
+                    width: 65.w,
                     child: const Icon(Icons.newspaper));
               },
             ),
@@ -44,7 +46,7 @@ class NewsDetail extends StatelessWidget {
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp),
                   ),
                   const YMargin(5),
-                  Text("- ${article.author ?? ""}",
+                  Text("- ${article.author ?? "N/A"}",
                       textAlign: TextAlign.right,
                       style:
                           TextStyle(fontSize: 13.sp, color: Colors.redAccent)),

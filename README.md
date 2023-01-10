@@ -1,16 +1,16 @@
 # news_app
 
-A new Flutter project.
+The state management used was provider.
+Get_it for dependency injection.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+The app contains the Sign Up, Sign In, New List and View List Screens:
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Sign Up](signup.png)
+![Sign up error](signup_error.png)
+![Sign In ](sign_in.png)
+![Sign In Error](sign_in_error.png)
+![News List](news_list.png)
+![View News](view_article.png)
+Contact: maimunahibro94@gmail.com

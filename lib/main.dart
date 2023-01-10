@@ -9,6 +9,7 @@ import 'package:news_app/viewmodels/news_viewmodel.dart';
 import 'package:news_app/viewmodels/sign_in_viewmodel.dart';
 import 'package:news_app/viewmodels/sign_up_viewmodel.dart';
 import 'package:news_app/views/authentication/signin_view.dart';
+import 'package:news_app/views/news_view/news_list_view.dart';
 
 import 'package:provider/provider.dart';
 
